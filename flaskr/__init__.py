@@ -36,9 +36,14 @@ def create_app(test_config=None): #application factory function(って何??)
   from . import db
   db.init_app(app)
   
-  #appにbpをimportし登録
+  #appにbpをimportし登録(auth)
   #新規ユーザ登録とlog in、log outのためのviewを持つ
   from . import auth
   app.register_blueprint(auth.bp)
+  
+  #appにbpをimportし登録(blog)
+  from . import blog
+  app.register_blueprint(blog.bp)
+  app.add_url_rule('/', endpoint='index')
 
   return app
